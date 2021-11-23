@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<body>
+<div>
+<table>
+    <tr>
+        <th>title</th>
+        <th>text</th>
+        <th>author</th>
+        <th>picture</th>
+
+    </tr>
+    <tr th:each = "n: ${news}">
+        <td th:text="${n.title}"></td>
+        <td th:text="${n.text}"></td>
+        <td th:text="${n.author}"></td>
+        <td>
+            <div>
+                <img th:src="@{/images/{filename}(filename = ${n.path})}" height="200" width="200">
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+<form method="post" th:action="@{/newsPage/getAll}" enctype="multipart/form-data">
+    <input type="text" name="title">
+    <input type="text" name="text">
+    <input type="file" name="file">
+    <button type="submit">
+        add
+    </button>
+
+</form>
+<h1>
+    search by title
+</h1>
+<form method="post" action="newspage/search">
+    <input type="text" name="title">
+    <button type="submit">
+        add
+    </button>
+</form>
+<h1>
+    search between two id's
+</h1>
+<form method="post" action="demo/search2">
+    <input type="number" name="titleId">
+    <input type="number" name="titleSecondId">
+    <button type="submit">
+        search
+    </button>
+</form>
+<h1>
+    Order news by title
+</h1>
+<form method="post" action="demo/search3">
+    <select name="order">
+        <option value="asc">По убыванию</option>
+        <option value="desc">По возрастанию</option>
+        <option value="des">По id в обратном порядке</option>
+    </select>
+    <button type="submit">
+        order
+    </button>
+</form>
+<h1>
+    Pick and change a news by Id
+</h1>
+<form method="post" action="demo/changed">
+    <input type="number" name="new">
+    <button type="submit">
+        search
+    </button>
+</form>
+<h2>Check Time</h2>
+
+<button type="button"
+        onclick="document.getElementById('demo').innerHTML = Date()">
+    Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+
+<h2>Change style</h2>
+<script>
+    function myFunction() {
+        document.getElementById("demo").style.fontSize = "25px";
+        document.getElementById("demo").style.color = "red";
+        document.getElementById("demo").style.backgroundColor = "yellow";
+    }
+</script>
+
+<button type="button" onclick="myFunction()">Click Me!</button>
+
+
+</div>
+</body>
+</html>
